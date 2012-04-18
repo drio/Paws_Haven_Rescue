@@ -1,0 +1,12 @@
+%form{:action => "/dog/create", :method => "post"}
+  %input{:type => "textbox", :name => "name", :id => "name"}
+  %input{:type => "submit", :value => "Add Doggie!"}
+
+%h2 Doggies:
+- unless @dogs.empty?
+  %ul
+    - @dogs.each do |d|
+      %li{:class => "completed"}
+        %a{:href => "dog/#{d.id}/edit"}= d.name
+- else
+  %p No Doggies yet!

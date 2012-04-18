@@ -1,0 +1,27 @@
++ backend
+  get  /dog/:id
+
+  get  /dog/new
+  post /dog/create
+
+  get  /dogs    (list dogs)
+
+  get  /dog/:id/edit
+  put  /dog/:id  (trick)
+
+  get    /dog/:id/delete
+  delete /dog/:id
+--------
+  get  /picture/:id
+
+  get  /picture/new    --> It has to be associated with a dog
+  post /picture/create --> creat TN and upload original + TN
+
+  get  /pictures    (list pictures)
+
+  NO get  /picture/:id/edit
+  NO put  /picture/:id  (trick)
+
+  get    /picture/:id/delete
+  delete /picture/:id  --> delete in amazon
+

@@ -1,0 +1,7 @@
+%h2= @dog.name
+%h3 Are you sure you want to delete this dog?
+%form{:action => "/dog/#{@dog.id}", :method => "post"}
+  %input{:type => "hidden" , :name => "_method", :value => "delete"}
+  %input{:type => "submit" , :value => "Delete"}
+OR
+%a{:href => "/dogs"} Cancel
