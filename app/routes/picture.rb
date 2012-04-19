@@ -9,14 +9,23 @@ module DoggieSite
 
     # Actually create new task
     post '/picture/create' do
-      picture         = picture.new(:name => params[:name])
-      picture.adopted = false
-      if picture.save
-        status 201
-      else
-        status 412
+      # Make sure we have a file to work with
+      unless params[:file] &&
+             (tmpfile = params[:file][:tempfile]) &&
+             (name = params[:file][:filename])
+        return haml(:upload)
       end
-      redirect '/pictures'
+
+      bucket_name = DoggieSite::Config::AMAZON_S3_BUCKET
+      AWS::S3::Base.establish_connection!(
+        :access_key_id     => DoggieSite::Config::AMAZON_S3_KEY_ID,
+        :secret_access_key => DoggieSite::Config::AMAZON_S3_ACCESS_KEY)
+      AWS::S3::S3Object.store(name,
+                              open(tmpfile),
+                              bucket_name,
+                              :access => :public_read)
+
+      "<img src='https://s3.amazonaws.com/#{bucket_name}/#{name}'>"
     end
 
     # list all pictures
