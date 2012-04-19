@@ -10,6 +10,8 @@
         %a{:href => "/dog/#{d.id}/edit"}= d.name
         (#{d.pictures.size})
         %a{:href => "/picture/#{d.id}/new"} Add picture
-
+        - d.pictures.each do |p|
+          %img{:src => p.s3_original_url, :height => 100, :width => 100}
+        %br
 - else
   %p No Doggies yet!
