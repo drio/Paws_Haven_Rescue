@@ -8,5 +8,6 @@
     - @dogs.each do |d|
       %li{:class => "completed"}
         %a{:href => "dog/#{d.id}/edit"}= d.name
+        (#{d.pictures.size})
 - else
   %p No Doggies yet!
