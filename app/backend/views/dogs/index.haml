@@ -2,7 +2,7 @@
   %input{:type => "textbox", :name => "name", :id => "name"}
   %input{:type => "submit", :value => "Add Doggie!"}
 
-%h2 Doggies:
+%h2 Doggies (#{@dogs.size}):
 - unless @dogs.empty?
   %ul
     - @dogs.each do |d|

@@ -14,29 +14,33 @@ module DoggieSite
       unless params[:file] &&
              (tmpfile = params[:file][:tempfile]) &&
              (name = params[:file][:filename])
+        # TODO: pass info so the user know you need a file
         redirect "/picture/#{params[:dog_id]}/new"
       end
 
+      obj_name    = "#{params[:dog_id]}_#{name}"
       bucket_name = DoggieSite::Config::AMAZON_S3_BUCKET
       DoggieSite::S3::connect()
-      AWS::S3::S3Object.store(name,
+      AWS::S3::S3Object.store(obj_name,
                               open(tmpfile),
                               bucket_name,
                               :access => :public_read)
-      url = "https://s3.amazonaws.com/#{bucket_name}/#{name}"
+      url = "https://s3.amazonaws.com/#{bucket_name}/#{obj_name}"
 
       picture                 = Picture.new
       picture.name            = name
       picture.s3_original_url = url
-      picture.save
+      picture.save!
       dog = Dog.first(:id => params[:dog_id])
       dog.pictures << picture
-      dog.save
+      dog.save!
 
-      "You added dog with id: #{params[:dog_id]}" +
-      "<br>" +
-      "<img src='https://s3.amazonaws.com/#{bucket_name}/#{name}' height='200' width='200'>" +
-      "<a href='/dogs'>back to dogs</a>"
+      redirect '/dogs'
+      #"You added a picture for dog with id: #{params[:dog_id]} <br>" +
+      #"Now #{dog.name} has #{dog.pictures.size} pictures.<br>" +
+      #"<br>" +
+      #"<img src='#{url}' height='200' width='200'>" +
+      #"<a href='/dogs'>back to dogs</a>"
     end
 
     # list all pictures
