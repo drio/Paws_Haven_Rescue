@@ -1,4 +1,5 @@
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
+#$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + "routes/dog")
 
 # Dependencies
 require 'rubygems'
@@ -19,6 +20,10 @@ require_relative 'models/picture'
 # Tell datamapper to rebuild the DB if changes exist
 DataMapper.auto_upgrade!
 
+# Load routes
+require_relative 'routes/dog'
+require_relative 'routes/picture'
+
 # Non-autoloaded views
 #require_relative 'views/layout'
 #require_relative 'views/aggregate'
@@ -29,17 +34,4 @@ DataMapper.auto_upgrade!
 
 # Add some useful methods to the namespace of the app
 module DoggieSite
-  # The temporary directory that we can extract downloads to.
-  #
-  # Returns a relative String path.
-  def self.temp_dir
-    'tmp'
-  end
-
-  # The redis namespace to put everything else under.
-  #
-  # Returns a String.
-  def self.redis_namespace
-    "hopper"
-  end
 end

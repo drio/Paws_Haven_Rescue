@@ -1,0 +1,5 @@
+%h2 Add a new Picture
+%form{:action => "/picture/create", :method => "post"}
+  Name:
+  %input{:type => "textbox", :name => "name", :id => "name"}
+  %input{:type => "submit", :value => "Add picture!"}
