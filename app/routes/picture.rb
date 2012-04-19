@@ -3,7 +3,8 @@ module DoggieSite
     # VIEWS for pictures
 
     # Entry point for new picture
-    get '/picture/new' do
+    get '/picture/:id/new' do
+      @dog = Dog.get(params[:id])
       haml :"pictures/new"
     end
 
@@ -13,19 +14,29 @@ module DoggieSite
       unless params[:file] &&
              (tmpfile = params[:file][:tempfile]) &&
              (name = params[:file][:filename])
-        return haml(:upload)
+        redirect "/picture/#{params[:dog_id]}/new"
       end
 
       bucket_name = DoggieSite::Config::AMAZON_S3_BUCKET
-      AWS::S3::Base.establish_connection!(
-        :access_key_id     => DoggieSite::Config::AMAZON_S3_KEY_ID,
-        :secret_access_key => DoggieSite::Config::AMAZON_S3_ACCESS_KEY)
+      DoggieSite::S3::connect()
       AWS::S3::S3Object.store(name,
                               open(tmpfile),
                               bucket_name,
                               :access => :public_read)
+      url = "https://s3.amazonaws.com/#{bucket_name}/#{name}"
 
-      "<img src='https://s3.amazonaws.com/#{bucket_name}/#{name}'>"
+      picture                 = Picture.new
+      picture.name            = name
+      picture.s3_original_url = url
+      picture.save
+      dog = Dog.first(:id => params[:dog_id])
+      dog.pictures << picture
+      dog.save
+
+      "You added dog with id: #{params[:dog_id]}" +
+      "<br>" +
+      "<img src='https://s3.amazonaws.com/#{bucket_name}/#{name}' height='200' width='200'>" +
+      "<a href='/dogs'>back to dogs</a>"
     end
 
     # list all pictures

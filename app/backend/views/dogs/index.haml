@@ -7,7 +7,9 @@
   %ul
     - @dogs.each do |d|
       %li{:class => "completed"}
-        %a{:href => "dog/#{d.id}/edit"}= d.name
+        %a{:href => "/dog/#{d.id}/edit"}= d.name
         (#{d.pictures.size})
+        %a{:href => "/picture/#{d.id}/new"} Add picture
+
 - else
   %p No Doggies yet!

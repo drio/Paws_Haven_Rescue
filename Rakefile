@@ -25,3 +25,15 @@ task :s3_clean do
   AWS::S3::Bucket.delete(bucket_name, :force => true)
 end
 
+desc "remove db"
+task :rm_db do
+  sh "rm -f *.db"
+end
+
+desc "star_fresh: database and s3 bucket and start fresh"
+task :fresh => [:s3_clean, :rm_db, :s3_setup] do
+  puts "Ready to start fresh ..."
+end
+
+
+

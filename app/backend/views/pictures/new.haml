@@ -1,4 +1,5 @@
-%h2 Add a new Picture
+%h2 Add a new Picture for #{@dog.name}
 %form{:action => "/picture/create", :method => "post", :enctype=>"multipart/form-data"}
+  %input{:type => "hidden" , :name => "dog_id", :value => @dog.id}
   %input{:type => "file", :name => "file", :id => "name"}
   %input{:type => "submit", :value => "Add picture!"}

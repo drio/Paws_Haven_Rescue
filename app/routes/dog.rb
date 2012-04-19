@@ -28,7 +28,7 @@ module DoggieSite
     # end
 
     # list all dogs
-    get '/dogs' do
+    get %r{/dogs|/dogs/} do
       @dogs = Dog.all
       haml :"dogs/index"
     end
