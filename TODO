@@ -12,16 +12,16 @@
   get    /dog/:id/delete
   delete /dog/:id
 --------
-  get  /picture/:id
+    NO get  /picture/:id
 
-  1 get  /picture/new    --> It has to be associated with a dog
-  2 post /picture/create --> creat TN and upload original + TN
+  DONE get  /picture/new    --> It has to be associated with a dog
+  DONE post /picture/create --> creat TN and upload original + TN
 
-  get  /pictures    (list pictures)
+    NO get  /pictures    (list pictures)
 
     NO get  /picture/:id/edit
     NO put  /picture/:id  (trick)
 
-  get    /picture/:id/delete
-  delete /picture/:id  --> delete in amazon
+  DONE get    /picture/:id/delete
+  DONE delete /picture/:id  --> delete in amazon
 

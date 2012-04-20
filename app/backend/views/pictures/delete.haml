@@ -1,0 +1,7 @@
+%h2= @picture.name
+%h3 Are you sure you want to delete this picture?
+%form{:action => "/picture/#{@picture.id}", :method => "post"}
+  %input{:type => "hidden" , :name => "_method", :value => "delete"}
+  %input{:type => "submit" , :value => "Delete"}
+OR
+%a{:href => "/dogs"} Cancel

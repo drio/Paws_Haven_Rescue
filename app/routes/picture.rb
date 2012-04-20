@@ -18,6 +18,7 @@ module DoggieSite
         redirect "/picture/#{params[:dog_id]}/new"
       end
 
+      # Dump the new pictures in the bucket
       obj_name    = "#{params[:dog_id]}_#{name}"
       bucket_name = DoggieSite::Config::AMAZON_S3_BUCKET
       DoggieSite::S3::connect()
@@ -27,8 +28,10 @@ module DoggieSite
                               :access => :public_read)
       url = "https://s3.amazonaws.com/#{bucket_name}/#{obj_name}"
 
+      # Save image info in the database and link to dog
       picture                 = Picture.new
       picture.name            = name
+      picture.s3_obj_name     = obj_name
       picture.s3_original_url = url
       picture.save!
       dog = Dog.first(:id => params[:dog_id])
@@ -41,6 +44,24 @@ module DoggieSite
       #"<br>" +
       #"<img src='#{url}' height='200' width='200'>" +
       #"<a href='/dogs'>back to dogs</a>"
+    end
+
+    ## delete confirmation
+    get '/picture/:id/delete' do
+      @picture = Picture.get(params[:id])
+      haml :"pictures/delete"
+    end
+
+    ## delete task
+    delete '/picture/:id' do
+      s3_obj_name = Picture.first(:id => params[:id]).s3_obj_name
+      Picture.get(params[:id]).destroy
+
+      # Dump the new pictures in the bucket
+      DoggieSite::S3::connect()
+      AWS::S3::S3Object.delete(s3_obj_name, DoggieSite::Config::AMAZON_S3_BUCKET)
+
+      redirect '/dogs'
     end
 
     # list all pictures
@@ -71,16 +92,5 @@ module DoggieSite
     #  end
     #end
 
-    ## delete confirmation
-    #get '/picture/:id/delete' do
-    #  @picture = picture.get(params[:id])
-    #  haml :"pictures/delete"
-    #end
-
-    ## delete task
-    #delete '/picture/:id' do
-    #  picture.get(params[:id]).destroy
-    #  redirect '/pictures'
-    #end
   end
 end

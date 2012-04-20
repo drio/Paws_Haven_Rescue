@@ -4,6 +4,7 @@ module DoggieSite
 
     property :id,              Serial
     property :name,            String
+    property :s3_obj_name,     String
     property :s3_original_url, String
 
     belongs_to :dog
