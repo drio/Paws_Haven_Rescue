@@ -2,4 +2,17 @@
 %form{:action => "/dog/create", :method => "post"}
   Name:
   %input{:type => "textbox", :name => "name", :id => "name"}
+  %br
+
+  Breed:
+  %input{:type => "textbox", :name => "breed", :id => "breed"}
+  %br
+
+  Notes:
+  %br
+  %textarea{:name => "notes", :id => "notes",
+            :rows => "10", :cols => "80"}
+  %br
+  %br
+
   %input{:type => "submit", :value => "Add dog!"}

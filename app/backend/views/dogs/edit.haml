@@ -1,14 +1,17 @@
 %h2 Edit dog:
+
 %form{:action => "/dog/#{@dog.id}", :method => "post"}
   %input{:type => "hidden" ,
          :name => "_method",
          :value => "put"}
+
   name:
   %input{:type  => "textbox",
          :name  => "name",
          :id    => "name",
          :value => "#{@dog.name}"}
   %br
+
   adopted?: <!-- #{@dog.adopted ? 1 : 0}-->
   %input{:type  => "checkbox",
          :name  => "adopted",
@@ -16,6 +19,18 @@
          :value => "true",
          :checked => @dog.adopted ? true : nil}
   %br
+
+  breed:
+  %input{:type => "textbox", :name => "breed",
+         :id => "breed", :value => "#{@dog.breed}"}
+  %br
+
+  notes:
+  %br
+  %textarea{:name => "notes", :id => "notes",
+            :rows => "10", :cols => "80"} #{@dog.notes}
+
+
   %input{:type => "submit" , :value => "update"}
 
 %a{:href => "/dog/#{@dog.id}/delete" } Delete this dog

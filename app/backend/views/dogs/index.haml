@@ -1,6 +1,9 @@
 %form{:action => "/dog/create", :method => "post"}
   %input{:type => "textbox", :name => "name", :id => "name"}
   %input{:type => "submit", :value => "Add Doggie!"}
+Or if you prefer, use the
+%a{:href => "/dog/new"} advance
+mode for adding the new doggie.
 
 %h2 Doggies (#{@dogs.size}):
 - unless @dogs.empty?
