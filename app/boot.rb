@@ -36,16 +36,15 @@ require_relative 'routes/picture'
 # Add some useful methods to the namespace of the app
 module DoggieSite
   module Config
-    AMAZON_S3_BUCKET     = "doggie_site"
-    AMAZON_S3_KEY_ID     = ENV["AMAZON_S3_KEY_ID"]
-    AMAZON_S3_ACCESS_KEY = ENV["AMAZON_S3_ACCESS_KEY"]
+    AMAZON_S3_BUCKET = "doggie_site"
   end
 
   module S3
     def self.connect()
+      File.open("keys.txt","w") {|f| f.puts :s3_key.to_s}
       AWS::S3::Base.establish_connection!(
-        :access_key_id     => DoggieSite::Config:AMAZON_S3_KEY_ID
-        :secret_access_key => DoggieSite::Config:AMAZON_S3_ACCESS_KEY
+        :access_key_id     => DoggieSite::App.settings.s3_id,
+        :secret_access_key => DoggieSite::App.settings.s3_key
       )
     end
   end
