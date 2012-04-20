@@ -37,15 +37,16 @@ require_relative 'routes/picture'
 module DoggieSite
   module Config
     AMAZON_S3_BUCKET     = "doggie_site"
-    AMAZON_S3_KEY_ID     = "AKIAJCPHOMPVUVQLODCA"
-    AMAZON_S3_ACCESS_KEY = "rajtgaIaxoYb+eC8Ur1AThd9b7Bw6PXLIpyixOFQ"
+    AMAZON_S3_KEY_ID     = ENV["AMAZON_S3_KEY_ID"]
+    AMAZON_S3_ACCESS_KEY = ENV["AMAZON_S3_ACCESS_KEY"]
   end
 
   module S3
     def self.connect()
       AWS::S3::Base.establish_connection!(
-        :access_key_id     => "AKIAJCPHOMPVUVQLODCA",
-        :secret_access_key => "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")
+        :access_key_id     => DoggieSite::Config:AMAZON_S3_KEY_ID
+        :secret_access_key => DoggieSite::Config:AMAZON_S3_ACCESS_KEY
+      )
     end
   end
 end
