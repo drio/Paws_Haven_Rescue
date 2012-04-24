@@ -19,14 +19,18 @@ module DoggieSite
       end
 
       # Dump the new pictures in the bucket
-      obj_name    = "#{params[:dog_id]}_#{name}"
-      bucket_name = DoggieSite::Config::AMAZON_S3_BUCKET
-      DoggieSite::S3::connect()
-      AWS::S3::S3Object.store(obj_name,
-                              open(tmpfile),
-                              bucket_name,
-                              :access => :public_read)
-      url = "https://s3.amazonaws.com/#{bucket_name}/#{obj_name}"
+      begin
+        obj_name    = "#{params[:dog_id]}_#{name}"
+        bucket_name = DoggieSite::Config::AMAZON_S3_BUCKET
+        DoggieSite::S3::connect()
+        AWS::S3::S3Object.store(obj_name,
+                                open(tmpfile),
+                                bucket_name,
+                                :access => :public_read)
+        url = "https://s3.amazonaws.com/#{bucket_name}/#{obj_name}"
+      rescue
+        'There was a problem while uploading the picture to S3.'
+      end
 
       # Save image info in the database and link to dog
       picture                 = Picture.new
