@@ -1,8 +1,16 @@
 module DoggieSite
   class App < Sinatra::Base
-    get '/dogs.json' do
+    get '/dogs.json/:type' do
       content_type :json
-      Dog.all.to_json(:methods => [:pictures])
+      t = params[:type]
+      if t && t =~ /^happy|available$/
+        filter = (params[:type] == "happy") ? true : false
+        Dog.all(:adopted => filter).to_json(:methods => [:pictures])
+      elsif t && t == "all"
+        Dog.all.to_json(:methods => [:pictures])
+      else
+        status 400
+      end
     end
 
     get '/' do
