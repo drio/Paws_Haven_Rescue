@@ -5,7 +5,7 @@ gem 'data_mapper'
 gem 'dm-sqlite-adapter'
 gem 'fastthread'
 gem 'nokogiri'
-gem 'aws/s3'
+gem 'aws-s3'
 
 group :development do
   gem 'shotgun'
