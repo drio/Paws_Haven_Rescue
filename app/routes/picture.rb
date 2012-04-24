@@ -33,14 +33,18 @@ module DoggieSite
       end
 
       # Save image info in the database and link to dog
-      picture                 = Picture.new
-      picture.name            = name
-      picture.s3_obj_name     = obj_name
-      picture.s3_original_url = url
-      picture.save!
-      dog = Dog.first(:id => params[:dog_id])
-      dog.pictures << picture
-      dog.save!
+      begin
+        picture                 = Picture.new
+        picture.name            = name
+        picture.s3_obj_name     = obj_name
+        picture.s3_original_url = url
+        picture.save!
+        dog = Dog.first(:id => params[:dog_id])
+        dog.pictures << picture
+        dog.save!
+      rescue
+        'Issue saving picture in DB.'
+      end
 
       redirect '/dogs'
       #"You added a picture for dog with id: #{params[:dog_id]} <br>" +
