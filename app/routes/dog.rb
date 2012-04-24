@@ -1,5 +1,10 @@
 module DoggieSite
   class App < Sinatra::Base
+    get '/dogs.json' do
+      content_type :json
+      Dog.all.to_json(:methods => [:pictures])
+    end
+
     get '/' do
       redirect "/dogs"
     end

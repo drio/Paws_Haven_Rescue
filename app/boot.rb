@@ -6,6 +6,8 @@ require 'rubygems'
 require 'sinatra/base'
 require 'data_mapper'
 require 'aws/s3'
+require 'json'
+require 'dm-serializer'
 
 # Load the App
 require 'app'
