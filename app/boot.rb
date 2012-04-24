@@ -43,7 +43,6 @@ module DoggieSite
 
   module S3
     def self.connect()
-      File.open("keys.txt","w") {|f| f.puts :s3_key.to_s}
       AWS::S3::Base.establish_connection!(
         :access_key_id     => DoggieSite::App.settings.s3_id,
         :secret_access_key => DoggieSite::App.settings.s3_key
