@@ -33,7 +33,7 @@ module DoggieSite
       picture.name            = name
       picture.s3_obj_name     = obj_name
       picture.s3_original_url = url
-      unless pictures.save
+      unless picture.save
         "DRD>> Problems saving the picture in DB. Details follow:"
         picture.errors.each {|e| puts ">> #{e}"}
       end
