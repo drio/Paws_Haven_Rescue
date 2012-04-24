@@ -36,7 +36,7 @@ module DoggieSite
       picture.s3_obj_name     = obj_name
       picture.s3_original_url = url
       picture.save!
-      puts "DRD>> after saving picture in DB"
+      puts "DRD>> after saving picture in DB picture.name=#{name}"
 
       dog = Dog.first(:id => params[:dog_id])
       dog.pictures << picture
