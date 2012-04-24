@@ -28,21 +28,16 @@ module DoggieSite
                               :access => :public_read)
       url = "https://s3.amazonaws.com/#{bucket_name}/#{obj_name}"
 
-      puts "DRD>> after upload to S3"
-
       # Save image info in the database and link to dog
       picture                 = Picture.new
       picture.name            = name
       picture.s3_obj_name     = obj_name
       picture.s3_original_url = url
-      picture.save
-      puts "DRD>> after saving picture in DB picture.name=#{name}"
+      puts "DRD>> Problems saving the picture in DB" unless picture.save
 
       dog = Dog.first(:id => params[:dog_id])
       dog.pictures << picture
-      dog.save
-
-      puts "DRD>> after saving image in DB"
+      puts "DRD>> Problems dog after adding new picture to DB" unless dog.save
 
       redirect '/dogs'
       #"You added a picture for dog with id: #{params[:dog_id]} <br>" +
