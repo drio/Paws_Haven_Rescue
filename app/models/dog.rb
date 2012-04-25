@@ -6,7 +6,7 @@ module DoggieSite
     property :name,         String
     property :adopted,      Boolean
     property :breed,        String
-    property :notes,        Text
+    property :notes,        String, :length => 1024
     property :created_at,   DateTime
 
     has n, :pictures
