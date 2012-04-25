@@ -27,14 +27,6 @@ DataMapper.auto_upgrade!
 require_relative 'routes/dog'
 require_relative 'routes/picture'
 
-# Non-autoloaded views
-#require_relative 'views/layout'
-#require_relative 'views/aggregate'
-#require_relative 'views/project'
-
-# Extensions
-#require_relative '../lib/ext/array'
-
 # Add some useful methods to the namespace of the app
 module DoggieSite
   module Config

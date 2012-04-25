@@ -1,5 +1,9 @@
 module DoggieSite
   class App < Sinatra::Base
+    get '/' do
+      redirect "/index.html"
+    end
+
     get '/dogs.json/:type' do
       content_type :json
       t = params[:type]
@@ -11,10 +15,6 @@ module DoggieSite
       else
         status 400
       end
-    end
-
-    get '/' do
-      redirect "/dogs"
     end
 
     # Entry point for new Dog
