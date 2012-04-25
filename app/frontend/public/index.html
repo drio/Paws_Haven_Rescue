@@ -19,11 +19,11 @@
 
     <!-- TEMPLATES -->
     <script id="dogTemplate" type="text/template">
-      <a href="/#dog/<%=id%>"> <img src="<%= photo %>" alt="<%= name %>" /></a>
+      <a href="/#dog/<%=id%>"> <img src="<%= pictures[0].s3_original_url %>" height="200" width="200" alt="<%= name %>" /></a>
     </script>
 
     <script id="detailsTemplate" type="text/template">
-      <img src="<%= photo %>" alt="<%= name %>" />
+      <img src="<%= pictures[0].s3_original_url %>" height="200" width="200" alt="<%= name %>" />
       <br>
       <h2>Name : <%= name %>
       <h2>breed: <%= breed %>
