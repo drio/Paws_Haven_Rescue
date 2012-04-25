@@ -4,7 +4,7 @@ This is a [sinatra](http://www.sinatrarb.com/) app that I am building for
 a local dog rescue group in Houston.
 
 The backend is modeled around
-(http://www.ibm.com/developerworks/webservices/library/ws-restful/)[RESTful]
+[RESTful](http://www.ibm.com/developerworks/webservices/library/ws-restful/)
 services.
 
 Also, the backend uses amazon's
