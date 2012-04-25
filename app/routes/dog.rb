@@ -19,11 +19,13 @@ module DoggieSite
 
     # Entry point for new Dog
     get '/dog/new' do
+      protected!
       haml :"dogs/new"
     end
 
     # Actually create new task
     post '/dog/create' do
+      protected!
       dog         = Dog.new
       dog.name    = params[:name]
       dog.breed   = params[:breed]
@@ -45,18 +47,21 @@ module DoggieSite
 
     # list all dogs
     get %r{/dogs|/dogs/} do
+      protected!
       @dogs = Dog.all
       haml :"dogs/index"
     end
 
     # edit dog
     get '/dog/:id/edit' do
+      protected!
       @dog = Dog.get(params[:id])
       haml :"dogs/edit"
     end
 
     # update dog
     put '/dog/:id' do
+      protected!
       dog = Dog.get(params[:id])
       #dog.completed_at = params[:completed] ? Time.now : nil
       dog.name    = params[:name]
@@ -75,12 +80,14 @@ module DoggieSite
 
     # delete confirmation
     get '/dog/:id/delete' do
+      protected!
       @dog = Dog.get(params[:id])
       haml :"dogs/delete"
     end
 
     # delete task
     delete '/dog/:id' do
+      protected!
       Dog.get(params[:id]).destroy
       redirect '/dogs'
     end

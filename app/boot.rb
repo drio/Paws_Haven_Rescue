@@ -26,6 +26,7 @@ DataMapper.auto_upgrade!
 # Load routes
 require_relative 'routes/dog'
 require_relative 'routes/picture'
+require_relative 'routes/admin'
 
 # Add some useful methods to the namespace of the app
 module DoggieSite

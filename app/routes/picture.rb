@@ -4,12 +4,14 @@ module DoggieSite
 
     # Entry point for new picture
     get '/picture/:id/new' do
+      protected!
       @dog = Dog.get(params[:id])
       haml :"pictures/new"
     end
 
     # Actually create new task
     post '/picture/create' do
+      protected!
       # Make sure we have a file to work with
       unless params[:file] &&
              (tmpfile = params[:file][:tempfile]) &&
@@ -52,12 +54,14 @@ module DoggieSite
 
     ## delete confirmation
     get '/picture/:id/delete' do
+      protected!
       @picture = Picture.get(params[:id])
       haml :"pictures/delete"
     end
 
     ## delete task
     delete '/picture/:id' do
+      protected!
       s3_obj_name = Picture.first(:id => params[:id]).s3_obj_name
       Picture.get(params[:id]).destroy
 
@@ -67,34 +71,5 @@ module DoggieSite
 
       redirect '/dogs'
     end
-
-    # list all pictures
-    #get '/pictures' do
-    #  @pictures = picture.all
-    #  haml :"pictures/index"
-    #end
-
-    ## edit picture
-    #get '/picture/:id/edit' do
-    #  @picture = picture.get(params[:id])
-    #  haml :"pictures/edit"
-    #end
-
-    ## update picture
-    #put '/picture/:id' do
-    #  picture = picture.get(params[:id])
-    #  #picture.completed_at = params[:completed] ? Time.now : nil
-    #  picture.name    = params[:name]
-    #  picture.adopted = (params[:adopted] == "true" ? true : false)
-    #  if picture.save
-    #    status 201
-    #    #redirect '/picture/' + picture.id.to_s + '/edit'
-    #    redirect '/pictures'
-    #  else
-    #    status 412
-    #    redirect '/pictures'
-    #  end
-    #end
-
   end
 end
