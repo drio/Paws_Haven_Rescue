@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DoggieSite Web App</title>
+    <link rel="stylesheet" href="css/screen.css" />
+  </head>
+  <body>
+    <div id="screen">
+      <div id="navigation">
+        <span class="title">DoggieSite</span>
+        <span class="links">
+          <a href="/#available">Available dogs</a> |
+          <a href="/#happy">Happy tails</a>
+        </span>
+      </div>
+      <div id="dynamic-content"></div>
+    </div>
+
+    <!-- TEMPLATES -->
+    <script id="dogTemplate" type="text/template">
+      <a href="/#dog/<%=id%>"> <img src="<%= photo %>" alt="<%= name %>" /></a>
+    </script>
+
+    <script id="detailsTemplate" type="text/template">
+      <img src="<%= photo %>" alt="<%= name %>" />
+      <br>
+      <h2>Name : <%= name %>
+      <h2>breed: <%= breed %>
+      <p>
+        <%= notes %>
+      </p>
+    </script>
+
+    <!-- necessary libs -->
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/json2.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/backbone-min.js"></script>
+    <script src="js/app.js"></script>
+
+  </body>
+</html>
