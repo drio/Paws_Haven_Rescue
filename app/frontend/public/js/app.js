@@ -132,7 +132,7 @@
     },
 
     defaultRoute: function() {
-      //this.show_available();
+      this.show_home();
     }
   });
 
