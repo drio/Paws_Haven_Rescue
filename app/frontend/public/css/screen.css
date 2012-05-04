@@ -40,7 +40,7 @@
 }
 
 .dog-container {
-  width:150px;
+  width:180px;
   padding:10px;
   border:0px solid #aaa;
   float:left;
@@ -58,6 +58,8 @@
   border-right-color:#aaa;
   border-bottom-color:#aaa;
   margin-right:10px; float:left;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /*

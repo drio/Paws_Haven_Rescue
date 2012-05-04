@@ -25,7 +25,7 @@ task :s3_clean do
   AWS::S3::Bucket.delete(bucket_name, :force => true)
 end
 
-desc "remove db"
+desc "remove _LOCAL_ sqlite3 db"
 task :rm_db do
   sh "rm -f *.db"
 end
