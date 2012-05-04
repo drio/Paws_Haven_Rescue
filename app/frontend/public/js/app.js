@@ -48,7 +48,6 @@
 
     render: function () {
       var tmpl = _.template(this.template);
-
       $(this.el).html(tmpl(this.model.toJSON()));
       return this;
     }
@@ -104,11 +103,16 @@
   ////////////////////////////////////////////////////////
   var AppRoutes = Backbone.Router.extend({
     routes: {
+      "home"      : "show_home",
+      "stories"   : "show_stories",
       "available" : "show_available",
       "happy"     : "show_happy",
       "dog/:id"   : "details",
       "*other"    : "defaultRoute"
     },
+
+    show_home   : function() { $("#home").css("display", "block"); },
+    show_stories: function() { $("#stories").css("display", "block"); },
 
     show_available: function() {
       var dogs = new Dogs();
@@ -128,7 +132,7 @@
     },
 
     defaultRoute: function() {
-      this.show_available();
+      //this.show_available();
     }
   });
 
