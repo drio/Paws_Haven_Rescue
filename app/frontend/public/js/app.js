@@ -112,7 +112,7 @@
     },
 
     show_home   : function() { $("#home").css("display", "block"); },
-    show_stories: function() { $("#stories").css("display", "block"); },
+    show_stories: function() { console.log("DRD>> Loading stories"); $("#stories").css("display", "block"); },
 
     show_available: function() {
       var dogs = new Dogs();
@@ -132,12 +132,14 @@
     },
 
     defaultRoute: function() {
+      console.log("DRD>> Loading default route.");
       this.show_home();
     }
   });
 
   // MAIN
   ///////////////////////////////////////////////////////////
+  console.log("DRD>> Starting App ...");
   var routes = new AppRoutes();
   Backbone.history.start();
   routes.navigate();
