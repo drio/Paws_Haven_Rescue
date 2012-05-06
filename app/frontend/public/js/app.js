@@ -102,6 +102,8 @@
   // ROUTES
   ////////////////////////////////////////////////////////
   var AppRoutes = Backbone.Router.extend({
+    el: $("#dynamic-content"),
+
     routes: {
       "home"      : "show_home",
       "stories"   : "show_stories",
@@ -111,8 +113,9 @@
       "*other"    : "defaultRoute"
     },
 
-    show_home   : function() { $("#home").css("display", "block"); },
-    show_stories: function() { console.log("DRD>> Loading stories"); $("#stories").css("display", "block"); },
+    /* TODO: This could be a single function for all the static templates */
+    show_home   : function() { this.el.html($("#home_template").html()); },
+    show_stories: function() { this.el.html($("#stories_template").html()); },
 
     show_available: function() {
       var dogs = new Dogs();
