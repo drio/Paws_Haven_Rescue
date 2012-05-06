@@ -135,14 +135,12 @@
     },
 
     defaultRoute: function() {
-      console.log("DRD>> Loading default route.");
       this.show_home();
     }
   });
 
   // MAIN
   ///////////////////////////////////////////////////////////
-  console.log("DRD>> Starting App ...");
   var routes = new AppRoutes();
   Backbone.history.start();
   routes.navigate();
